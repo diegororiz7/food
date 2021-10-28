@@ -21,7 +21,7 @@ class Usuarios extends BaseController{
         $data = [
 
             'titulo'   => 'Listando os usuários',
-            'usuarios' => $this->usuarioModel->findAll()
+            'usuarios' => $this->usuarioModel->withDeleted(true)->findAll()
 
         ];
 
@@ -171,6 +171,26 @@ class Usuarios extends BaseController{
             return redirect()->back();
 
         }       
+
+    }
+
+    public function excluir($id = null){
+
+        $usuario = $this->buscaUsuarioOu404($id);
+
+        if($this->request->getMethod() === 'post'){
+
+            $this->usuarioModel->delete($id);
+            return redirect()->to(site_url('admin/usuarios'))->with('sucesso', "Usuário $usuario->nome excluído com sucesso!");
+
+        }
+
+        $data = [
+            'titulo'  => "Excluindo o usuário $usuario->nome",
+            'usuario' => $usuario
+        ];
+
+        return view('Admin/Usuarios/excluir', $data);
 
     }
 

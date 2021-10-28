@@ -65,7 +65,7 @@
 
 <?php echo $this->section('scripts'); ?>
 
-<script src="<?php echo site_url('Admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
+<script src="<?php echo site_url('Admin/vendors/mask/jquery.mask.min.js'); ?>" ></script>
 <script src="<?php echo site_url('Admin/vendors/mask/app.js'); ?>"></script>
 
 <?php echo $this->endSection(); ?>
