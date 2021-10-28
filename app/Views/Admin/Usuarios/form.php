@@ -13,7 +13,7 @@
     
     <div class="form-group col-md-3">
         <label for="telefone">Telefone</label>
-        <input name="rtelefone" type="text" class="form-control sp_celphones" id="telefone" value="<?php echo old('telefone', esc($usuario->telefone)); ?>">
+        <input name="telefone" type="text" class="form-control sp_celphones" id="telefone" value="<?php echo old('telefone', esc($usuario->telefone)); ?>">
     </div>
 
     <div class="form-group col-md-3">
@@ -30,8 +30,8 @@
     </div>
     
     <div class="form-group col-md-3">
-        <label for="confirmation_password">Confirmação de Senha</label>
-        <input type="password" class="form-control" name="password_confirmation" id="confirmation_password">
+        <label for="password_confirmation">Confirmação de Senha</label>
+        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
     </div>
 
 </div>
