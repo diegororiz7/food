@@ -23,7 +23,7 @@ class UsuarioModel extends Model{
         'nome'             => 'required|min_length[4]|max_length[120]',
         'email'            => 'required|valid_email|is_unique[usuarios.email]',
         'cpf'              => 'required|exact_length[14]|validaCpf|is_unique[usuarios.cpf]',
-        'telefone'         => 'required',
+        'telefone'         => 'required|min_length[14]|max_length[16]',
         'password'         => 'required|min_length[6]',
         'password_confirmation' => 'required_with[password]|matches[password]',
     ];
@@ -38,6 +38,9 @@ class UsuarioModel extends Model{
         'cpf'        => [
             'required'  => 'Desculpe, o campo CPF é obrigatório!',            
             'is_unique' => 'Desculpe, esse cpf já existe!',
+        ],
+        'telefone'        => [
+            'required'  => 'Desculpe, o campo telefone é obrigatório!'
         ],
     ];
     //Eventos callback
@@ -77,6 +80,15 @@ class UsuarioModel extends Model{
 
         unset($this->validationRules['password']);
         unset($this->validationRules['password_confirmation']);
+
+    }
+
+    public function desfazerExclusao(int $id){
+
+        return $this->protect(false)
+                    ->where('id', $id)
+                    ->set('deletado_em', null)
+                    ->update();
 
     }
 

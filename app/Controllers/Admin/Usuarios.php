@@ -21,7 +21,8 @@ class Usuarios extends BaseController{
         $data = [
 
             'titulo'   => 'Listando os usuários',
-            'usuarios' => $this->usuarioModel->withDeleted(true)->findAll()
+            'usuarios' => $this->usuarioModel->withDeleted(true)->paginate(10),
+            'pager'    => $this->usuarioModel->pager,
 
         ];
 
@@ -116,6 +117,13 @@ class Usuarios extends BaseController{
 
         $usuario = $this->buscaUsuarioOu404($id);
 
+        if($usuario->deletado_em != null){
+
+            return redirect()->back()->with('info', "O usuário $usuario->nome encontra-se excluído. 
+                                            Portanto, não é possível editá-lo!");
+
+        }
+
         $data = [
             'titulo'  => "Editando o usuário $usuario->nome",
             'usuario' => $usuario
@@ -130,6 +138,13 @@ class Usuarios extends BaseController{
         if($this->request->getMethod() === 'post'){
 
             $usuario = $this->buscaUsuarioOu404($id);
+
+            if($usuario->deletado_em != null){
+
+                return redirect()->back()->with('info', "O usuário $usuario->nome encontra-se excluído. 
+                                                Portanto, não é possível atualizá-lo!");
+    
+            }
 
             $post = $this->request->getPost();
 
@@ -178,6 +193,19 @@ class Usuarios extends BaseController{
 
         $usuario = $this->buscaUsuarioOu404($id);
 
+        if($usuario->deletado_em != null){
+
+            return redirect()->back()->with('info', "O usuário $usuario->nome encontra-se excluído. 
+                                            Portanto, não é possível excluí-lo!");
+
+        }
+
+        if($usuario->is_admin){
+
+            return redirect()->back()->with('info', 'Não é possível excluir um usuário <b>Administrador</b>');
+
+        }
+
         if($this->request->getMethod() === 'post'){
 
             $this->usuarioModel->delete($id);
@@ -194,11 +222,36 @@ class Usuarios extends BaseController{
 
     }
 
+    public function desfazerExclusao($id = null){
+
+        $usuario = $this->buscaUsuarioOu404($id);
+
+        if($usuario->deletado_em == null){
+
+            return redirect()->back()->with('info', 'Apenas usuários excluídos podem ser recuperados');
+
+        }
+
+        if($this->usuarioModel->desfazerExclusao($id)){
+
+            return redirect()->back()->with('sucesso', 'Exclusão desfeita com sucesso!');
+
+        }else{
+
+            return redirect()->back()
+                             ->with('errors_model', $this->usuarioModel->errors())
+                             ->with('atencao', 'Por favor verifique os erros abaixo')
+                             ->withInput();
+
+        }
+
+    }
+
     //parametro id
     //retorna objeto usuario
     private function buscaUsuarioOu404(int $id = null){
 
-        if(!$id || !$usuario = $this->usuarioModel->where('id', $id)->first()){
+        if(!$id || !$usuario = $this->usuarioModel->withDeleted(true)->where('id', $id)->first()){
 
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o usuário $id");
 
