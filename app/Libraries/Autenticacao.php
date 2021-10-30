@@ -61,6 +61,8 @@ class Autenticacao {
 
     }
 
+    //O método só fica logado quem estiver na basee e estiver ativo. Do contrário será feito logout;
+    //Return true sé não for null.
     public function estaLogado(){
 
         return $this->pegaUsuarioLogado() !== null;

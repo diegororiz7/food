@@ -92,4 +92,16 @@ class UsuarioModel extends Model{
 
     }
 
+    /** 
+     * @uso Classe Autenticacao
+     * @param string $email
+     * @return objeto $usuario
+    */
+
+    public function buscaUsuarioPorEmail(string $email){
+
+        return $this->where('email', $email)->first();
+
+    }
+
 }
