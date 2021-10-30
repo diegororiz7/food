@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Libraries;
+
 //Essa biblioteca cuidará da parte de autenticação na nossa aplicação
 
 class Autenticacao {
@@ -8,7 +10,7 @@ class Autenticacao {
 
     public function login(string $email, string $password){
 
-        $usuarioModel = new App\Models\UsuarioModel();
+        $usuarioModel = new \App\Models\UsuarioModel();
 
         $usuario = $usuarioModel->buscaUsuarioPorEmail($email);
 
@@ -78,7 +80,7 @@ class Autenticacao {
         }
 
         //Instanciamos o Model Usuário
-        $usuarioModel = new App\Models\UsuarioModel();
+        $usuarioModel = new \App\Models\UsuarioModel();
 
         //Recupero o usuário de acordo com a chave da sessão 'usuario_id'
         $usuario = $usuarioModel->find(session()->get('usuario_id'));
@@ -95,7 +97,7 @@ class Autenticacao {
     private function logaUsuario(object $usuario){
 
         $session = session();
-        $session->regenarete();
+        $session->regenerate();
         $session->set('usuario_id', $usuario->id);
 
     }
