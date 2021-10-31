@@ -16,9 +16,13 @@ class Filters extends BaseConfig
      * @var array
      */
     public $aliases = [
-        'csrf'     => CSRF::class,
-        'toolbar'  => DebugToolbar::class,
-        'honeypot' => Honeypot::class,
+        'csrf'      => CSRF::class,
+        'toolbar'   => DebugToolbar::class,
+        'honeypot'  => Honeypot::class,
+        'login'     => \App\Filters\LoginFilter::class,
+        'admin'     => \App\Filters\AdminFilter::class,
+        'visitante' => \App\Filters\VisitanteFilter::class,
+        'throttle'  => \App\Filters\Throttle::class,
     ];
 
     /**
@@ -47,7 +51,11 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $methods = [];
+    public $methods = [
+
+        'post' => ['throttle',]
+
+    ];
 
     /**
      * List of filter aliases that should run on any
@@ -58,5 +66,18 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+
+        'login' => [
+            'before' => [
+                'admin/*',
+            ]
+        ],
+        'admin' => [
+            'before' => [
+                'admin/*',
+            ]
+        ]
+
+    ];
 }
