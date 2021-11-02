@@ -62,29 +62,24 @@
               <div class="brand-logo">
                 <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo">
               </div>
-              <h4>Olá, seja bem vindo (a)!</h4>
-              <h6 class="font-weight-light mb-3">Por favor, realize o login.</h6>
+              <h4>Recuperando a senha!</h4>
+              <h6 class="font-weight-light mb-3"><?php echo $titulo; ?></h6>
 
-              <?php echo form_open('login/criar'); ?>
+              <?php echo form_open('password/processaesqueci'); ?>
 
               
                 <div class="form-group">
                   <input type="email" name="email" value="<?php echo old('email'); ?>"class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Digite o seu e-mail">
                 </div>
-                <div class="form-group">
-                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Digite a sua senha">
-                </div>
+
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">Entrar</button>
                 </div>
 
                 <div class="mt-3 d-flex justify-content-between align-items-center">                  
-                  <a href="<?php echo site_url('password/esqueci'); ?>" class="asuth-link text-black">Esqueci a minha senha</a>
+                  <a href="<?php echo site_url('login'); ?>" class="asuth-link text-black">Lembrei a minha senha</a>
                 </div>
-                                
-                <div class="text-center mt-4 font-weight-light">
-                  Ainda não tem uma conta? <a href="<?php echo site_url('registrar') ?>" class="text-primary">Criar conta</a>
-                </div>
+
               <?php echo form_close(); ?>
 
             </div>

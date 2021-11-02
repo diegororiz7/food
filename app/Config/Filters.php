@@ -22,7 +22,7 @@ class Filters extends BaseConfig
         'login'     => \App\Filters\LoginFilter::class,
         'admin'     => \App\Filters\AdminFilter::class,
         'visitante' => \App\Filters\VisitanteFilter::class,
-        'throttle'  => \App\Filters\Throttle::class,
+        'throttle'  => \App\Filters\ThrottleFilter::class,
     ];
 
     /**
@@ -53,7 +53,7 @@ class Filters extends BaseConfig
      */
     public $methods = [
 
-        'post' => ['throttle',]
+        'POST' => ['throttle',]
 
     ];
 
