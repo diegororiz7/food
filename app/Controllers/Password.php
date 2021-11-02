@@ -39,6 +39,13 @@ class Password extends BaseController{
 
             }
 
+            $usuario->iniciaPasswordReset();
+
+            $this->enviaEmailRedefinicaoSenha($usuario);
+
+            return redirect()->to(site_url('login'))
+                             ->with('sucesso','E-mail de redefinição de senha enviado para sua caixa de entrada');
+
             dd($usuario);
 
         }else{
@@ -46,6 +53,23 @@ class Password extends BaseController{
             return redirect()->back();
 
         }
+
+    }
+
+    private function enviaEmailRedefinicaoSenha(object $usuario){
+
+        $email = service('email');
+
+        $email->setFrom('no-reply@food.com.br', 'Food Delivery');
+        $email->setTo($usuario->email);
+
+        $email->setSubject('Redefinição de senha');
+
+        $mensagem = view('Password/reset_email',['token' => $usuario->reset_token]);
+        
+        $email->setMessage($mensagem);
+
+        $email->send();
 
     }
 }

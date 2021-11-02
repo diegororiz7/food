@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">Entrar</button>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">Recuperar senha</button>
                 </div>
 
                 <div class="mt-3 d-flex justify-content-between align-items-center">                  

@@ -16,8 +16,8 @@ class Home extends BaseController
         $email->setFrom('your@example.com', 'Your Name');
         $email->setTo('makas76592@cyadp.com');
 
-        $email->setSubject('Teste de e-mail');
-        $email->setMessage('Teste de e-mail');
+        $email->setSubject('Um novo teste');
+        $email->setMessage('Ainda mais legal');
 
         if($email->send()){
 
