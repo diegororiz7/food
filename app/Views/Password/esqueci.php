@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">Recuperar senha</button>
+                  <input id="btn-reset-senha" type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="Recuperar senha">
                 </div>
 
                 <div class="mt-3 d-flex justify-content-between align-items-center">                  
@@ -92,5 +92,17 @@
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('scripts'); ?>
-<!-- Aqui enviamos para o template principal os scripts -->
+
+<script>
+
+  $("form").submit(function(){
+
+    $(this).find(":submit").attr('disabled','disabled');
+
+    $("#btn-reset-senha").val("Enviando e-mail de recuperação...");
+
+  });              
+
+</script>
+
 <?php echo $this->endSection(); ?>
