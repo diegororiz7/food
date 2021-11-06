@@ -58,4 +58,13 @@ class CategoriaModel extends Model
                     ->getResult();    
 
     }
+
+    public function desfazerExclusao(int $id){
+
+        return $this->protect(false)
+                    ->where('id', $id)
+                    ->set('deletado_em', null)
+                    ->update();
+
+    }
 }
