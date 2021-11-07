@@ -19,10 +19,10 @@
                   <h4 class="card-title"><?php echo $titulo; ?></h4>
 
                   <div class="ui-widget">
-                    <input id="query" name="query" placeholder="Pesquise por uma categoria" class="form-control bg-light mb-5">
+                    <input id="query" name="query" placeholder="Pesquise por um extra de produto" class="form-control bg-light mb-5">
                   </div>
                   
-                  <a href="<?php echo site_url("admin/categorias/criar"); ?>" class="btn btn-success float-right mb-5">
+                  <a href="<?php echo site_url("admin/extras/criar"); ?>" class="btn btn-success float-right mb-5">
                       <i class="mdi mdi-plus btn-icon-prepend"></i>
                       Cadastrar
                   </a>
@@ -33,6 +33,7 @@
                       <thead>
                         <tr>
                           <th>Nome</th>
+                          <th>Preço</th>
                           <th>Data de criação</th>
                           <th>Ativo</th>
                           <th>Situação</th>
@@ -40,23 +41,24 @@
                       </thead>
                       <tbody>
 
-                          <?php foreach ($categorias as $categoria): ?>
+                          <?php foreach ($extras as $extra): ?>
                             <tr>
                                 <td>
-                                  <a href="<?php echo site_url("admin/categorias/show/$categoria->id"); ?>"><?php echo $categoria->nome; ?></a>
+                                  <a href="<?php echo site_url("admin/extras/show/$extra->id"); ?>"><?php echo $extra->nome; ?></a>
                                 </td>
                 
-                                <td><?php echo $categoria->criado_em->humanize(); ?></td>
+                                <td>R$&nbsp;<?php echo esc(number_format($extra->preco, 2)); ?></td>
+                                <td><?php echo $extra->criado_em->humanize(); ?></td>
                                 
-                                <td><?php echo ($categoria->ativo && $categoria->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>') ?></td>
+                                <td><?php echo ($extra->ativo && $extra->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>') ?></td>
                             
                                 <td>
 
-                                  <?php echo ($categoria->deletado_em === null ? '<label class="badge badge-primary">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>') ?>
+                                  <?php echo ($extra->deletado_em === null ? '<label class="badge badge-primary">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>') ?>
                                 
-                                  <?php if($categoria->deletado_em != null): ?>
+                                  <?php if($extra->deletado_em != null): ?>
 
-                                    <a href="<?php echo site_url("admin/categorias/desfazerexclusao/$categoria->id"); ?>" class="badge badge-dark ml-2">
+                                    <a href="<?php echo site_url("admin/extras/desfazerexclusao/$extra->id"); ?>" class="badge badge-dark ml-2">
                                         <i class="mdi mdi-undo btn-icon-prepend"></i>
                                         Desfazer
                                     </a>
@@ -98,7 +100,7 @@
 
           $.ajax({
 
-            url: "<?php echo site_url('admin/categorias/procurar'); ?>",
+            url: "<?php echo site_url('admin/extras/procurar'); ?>",
             dataType : "json",
             data: {
               term: request.term
@@ -109,7 +111,7 @@
                   
                   var data = [
                     {
-                      label: 'Categoria não encontrada',
+                      label: 'Extra não encontrado',
                       value: -1
                     }
                   ];
@@ -133,7 +135,7 @@
 
           }else{
 
-            window.location.href = '<?php echo site_url('admin/categorias/show'); ?>' + ui.item.id;
+            window.location.href = '<?php echo site_url('admin/extras/show'); ?>' + ui.item.id;
 
           }
 

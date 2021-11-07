@@ -187,7 +187,7 @@ class Categorias extends BaseController{
         if($this->request->getMethod() === 'post'){
 
             $this->categoriaModel->delete($id);
-            return redirect()->to(site_url('admin/categorias'))->with('sucesso', "Usuário $categoria->nome excluída com sucesso!");
+            return redirect()->to(site_url('admin/categorias'))->with('sucesso', "Categoria $categoria->nome excluída com sucesso!");
 
         }
 

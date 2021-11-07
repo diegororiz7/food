@@ -4,12 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoriaModel extends Model
+class ExtraModel extends Model
 {
-    protected $table                = 'categorias';
-    protected $returnType           = 'App\Entities\Categoria';
+    protected $DBGroup              = 'default';
+    protected $table                = 'extras';
+    protected $primaryKey           = 'id';
+    protected $useAutoIncrement     = true;
+    protected $insertID             = 0;
+    protected $returnType           = 'App\Entities\Extra';
     protected $useSoftDeletes       = true;
-    protected $allowedFields        = ['nome','slug','ativo'];
+    protected $allowedFields        = ['nome', 'slug', 'preco', 'descricao', 'ativo'];
 
     // Dates
     protected $useTimestamps        = true;
@@ -20,12 +24,12 @@ class CategoriaModel extends Model
 
     //Validações
     protected $validationRules    = [
-        'nome'             => 'required|min_length[2]|max_length[120]|is_unique[categorias.nome]',
+        'nome'             => 'required|min_length[2]|max_length[120]|is_unique[extras.nome]',
     ];
     protected $validationMessages = [
         'nome'        => [
             'required'  => 'Desculpe, o campo nome é obrigatório!',
-            'is_unique' => 'Eessa categoria já existe!',
+            'is_unique' => 'Eesse extra já existe!',
         ],
     ];
 

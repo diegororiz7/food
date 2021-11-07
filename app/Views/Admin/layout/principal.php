@@ -180,6 +180,12 @@
                             <i class="mdi mdi-box-shadow menu-icon"></i>
                             <span class="menu-title">Categorias</span>
                         </a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('admin/extras'); ?>">
+                            <i class="mdi mdi-box-shadow menu-icon"></i>
+                            <span class="menu-title">Extras</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/usuarios'); ?>">
