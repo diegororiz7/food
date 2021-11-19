@@ -81,7 +81,7 @@ class Produtos extends BaseController{
             'categorias'  => $this->categoriaModel->where('ativo',true)->findAll(),
         ];
 
-        return view('Admin/Produtos/show', $data);
+        return view('Admin/Produtos/criar', $data);
 
     }
 
