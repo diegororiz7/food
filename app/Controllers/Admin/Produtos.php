@@ -164,7 +164,7 @@ class Produtos extends BaseController{
 
     private function buscaProdutoOu404(int $id = null){
 
-        if(!$id || !$produto = $this->produtoModel->select('produtos.*','categorias.nome AS categoria')
+        if(!$id || !$produto = $this->produtoModel->select('produtos.*, categorias.nome AS categoria')
                                                   ->join('categorias','categorias.id = produtos.categoria_id')
                                                   ->where('produtos.id', $id)
                                                   ->withDeleted(true)
